@@ -14,6 +14,12 @@ BALL_SPEED = 5
 paddle_hit_sound = pygame.mixer.Sound("paddle.wav")
 wall_hit_sound = pygame.mixer.Sound("wall.wav")
 game_end_sound = pygame.mixer.Sound("gameend.wav")
+bg_sound = pygame.mixer.Sound("bg_sound.mp3")
+# Sound Volume
+bg_sound.set_volume(0.2)
+
+
+
 
 # Load and scale background image
 background_image = pygame.image.load("image-600x400.jpg")
@@ -48,8 +54,11 @@ def show_start_screen():
     screen.blit(start_text, (WIDTH // 2 - start_text.get_width() // 2, HEIGHT // 2 - start_text.get_height() // 2))
     screen.blit(instruction_text, (WIDTH // 2 - instruction_text.get_width() // 2, HEIGHT // 2 + start_text.get_height()))
     pygame.display.flip()
+    
+bg_sound.play(-1)
 
 while True:
+    
     if not game_started:
         show_start_screen()
         for event in pygame.event.get():
@@ -125,7 +134,7 @@ while True:
         pygame.draw.ellipse(screen, WHITE, (ball_x - 10, ball_y - 10, 20, 20))
         score_display = font.render(f"{score_left} - {score_right}", True, WHITE)
         screen.blit(score_display, (WIDTH // 2 - 40, 10))
-
+        bg_sound.play()
         if game_over:
             if score_left == 10:
                 winner_text = "Left Side Wins!"
