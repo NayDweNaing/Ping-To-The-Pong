@@ -107,12 +107,12 @@ while True:
                 score_right += 1
                 ball_x, ball_y, ball_speed_x, ball_speed_y = reset_ball()
                 ball_speed_x = BALL_SPEED  # Ensure the ball moves to the right after reset
-                time.sleep(0.1)
+                time.sleep(0.25)
             if ball_x >= WIDTH:
                 score_left += 1
                 ball_x, ball_y, ball_speed_x, ball_speed_y = reset_ball()
                 ball_speed_x = -BALL_SPEED  # Ensure the ball moves to the left after reset
-                time.sleep(0.1)
+                time.sleep(0.25)
             # Check if the game is over
             if score_left == 10 or score_right == 10:
                 game_over = True
