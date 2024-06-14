@@ -45,7 +45,7 @@ bg_sound.play(-1)
 def reset_ball():
     return WIDTH // 2, HEIGHT // 2, BALL_SPEED, BALL_SPEED
 
-
+clock = pygame.time.Clock()
 game_over = False
 game_started = False
 
