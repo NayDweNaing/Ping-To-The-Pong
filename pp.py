@@ -3,11 +3,21 @@ import sys
 import time
 
 pygame.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 600, 400
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BALL_SPEED = 5
+
+# Load sounds
+paddle_hit_sound = pygame.mixer.Sound("paddle.wav")
+wall_hit_sound = pygame.mixer.Sound("wall.wav")
+game_end_sound = pygame.mixer.Sound("gameend.wav")
+
+# Load and scale background image
+background_image = pygame.image.load("image-600x400.jpg")
+background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Ping to the Pong")
@@ -85,10 +95,12 @@ while True:
                 and right_paddle_y < ball_y < right_paddle_y + paddle_height
             ):
                 ball_speed_x = -ball_speed_x
+                paddle_hit_sound.play()
 
             # Ball collision with top and bottom walls
             if ball_y <= 0 or ball_y >= HEIGHT:
                 ball_speed_y = -ball_speed_y
+                wall_hit_sound.play()
 
             # Scoring
             if ball_x <= 0:
@@ -104,8 +116,10 @@ while True:
             # Check if the game is over
             if score_left == 10 or score_right == 10:
                 game_over = True
+                game_end_sound.play()
 
         screen.fill(BLACK)
+        screen.blit(background_image, (0, 0))
         pygame.draw.rect(screen, WHITE, (left_paddle_x, left_paddle_y, paddle_width, paddle_height))
         pygame.draw.rect(screen, WHITE, (right_paddle_x, right_paddle_y, paddle_width, paddle_height))
         pygame.draw.ellipse(screen, WHITE, (ball_x - 10, ball_y - 10, 20, 20))
