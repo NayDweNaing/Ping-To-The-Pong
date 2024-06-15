@@ -16,7 +16,7 @@ wall_hit_sound = pygame.mixer.Sound("wall.wav")
 game_end_sound = pygame.mixer.Sound("gameend.wav")
 bg_sound = pygame.mixer.Sound("bg_sound.mp3")
 # Sound Volume
-bg_sound.set_volume(0.1)
+bg_sound.set_volume(0.05)
 
 
 
